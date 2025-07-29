@@ -1,5 +1,6 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { isAuthenticated, logout } from './auth';
 
 //tells apollo client where the graphql server is
 const httpLink = createHttpLink({
@@ -10,6 +11,11 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   //// Only attempt to get the token if window is defined from client-side
  if (typeof window !== 'undefined') {
+   if (!isAuthenticated()) {
+      logout();
+      return { headers };
+    }
+
     const token = localStorage.getItem('jwt');
     return {
       headers: {

@@ -22,18 +22,20 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} relative min-h-screen`}>
         {/* Background Image*/}
+        <div className="absolute inset-0 -z-50 h-full w-full">
         <Image
           src={pixelatedCloud}
           alt="Pixelated cloud background"
           fill
-          className="object-cover -z-50"
+          className="object-cover"
           priority
           quality={100}
           placeholder="blur"
         />
+      </div>
         
         {/* Main content*/}
-        <div className="relative z-10">
+        <div className="relative z-10 min-h-screen w-full overflow-x-hidden">
           {children}
         </div>
       </body>

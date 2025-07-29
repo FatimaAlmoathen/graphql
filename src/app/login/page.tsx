@@ -36,7 +36,7 @@ export default function LoginPage() {
       />
       <div className="login-content">
         <div className="login-box">
-        <h2 className="rubik-iso-regular">Login</h2>
+        <h2>LOGIN</h2>
           {error && (
             <div className="alert-error">
               {error}
@@ -44,7 +44,7 @@ export default function LoginPage() {
           )}
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="usernameOrEmail" className="rubik-iso-regular">
+              <label htmlFor="usernameOrEmail">
                 Username or Email
               </label>
               <input
@@ -58,7 +58,7 @@ export default function LoginPage() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password" className="rubik-iso-regular">
+              <label htmlFor="password">
                 Password
               </label>
               <input

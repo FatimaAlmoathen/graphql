@@ -9,6 +9,11 @@ interface JwtPayload {
   exp?: number;
 }
 
+export const isTokenExpired = (decodedToken: JwtPayload): boolean => {
+  if (!decodedToken.exp) return true; // if no exp, invalid
+  return Date.now() >= decodedToken.exp * 1000;
+};
+
 export const login = async (usernameOrEmail: string, password: string) => {
   const credentials = btoa(`${usernameOrEmail}:${password}`);
 
@@ -31,12 +36,23 @@ export const login = async (usernameOrEmail: string, password: string) => {
     throw new Error("No token found in response");
   }
 
+  //verify that token is valid before storing
+  const decoded = jwtDecode<JwtPayload>(token);
+  if (isTokenExpired(decoded)) {
+    throw new Error("Token is expired");
+  }
+
   localStorage.setItem('jwt', token);
   return token;
 };
 
 export const logout = (): Promise<void> => {
   localStorage.removeItem('jwt');
+
+   if (typeof window !== 'undefined') {
+    window.location.href = '/login';
+  }
+
   return Promise.resolve();
 };
 
@@ -58,6 +74,11 @@ export const getCurrentUser = (): JwtPayload | null => {
     const cleanToken = token.replace(/^"|"$/g, '');
     const decoded = jwtDecode<JwtPayload>(cleanToken);
 
+    if (isTokenExpired(decoded)) {
+      logout(); // logout if token is expired
+      return null;
+    }
+
      return {
       sub: decoded.sub,
       id: decoded.id || (decoded.sub ? parseInt(decoded.sub) : undefined),
@@ -70,7 +91,14 @@ export const getCurrentUser = (): JwtPayload | null => {
   }
 };
 
-
 export const isAuthenticated = (): boolean => {
-  return getToken() !== null;
+  const token = getToken();
+  if (!token) return false;
+
+  try {
+    const decoded = jwtDecode<JwtPayload>(token);
+    return !isTokenExpired(decoded);
+  } catch {
+    return false;
+  }
 };
