@@ -682,6 +682,11 @@ rect.transition-all {
       object-fit:scale-down;
     width: 100%;
   }
+  .level-container,
+  .audit-ratio-container {
+    width: 130px !important;
+    height: 130px !important;
+  }
 }
 @media (max-width: 600px) {
   .level-container,
@@ -979,7 +984,7 @@ margin-left: 1rem;
 .skills-chart-wrapper {
   width: 100%;
   min-width: 600px;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   padding-bottom: 0.3rem;
 }
 
