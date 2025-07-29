@@ -29,7 +29,7 @@ export default function NotFound() {
           </p>
           
           <Link
-            href="/"
+            href="/profile"
             className={styles.homeButton}
           >
             Return Home
