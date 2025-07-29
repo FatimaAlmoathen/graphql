@@ -328,11 +328,11 @@ rect.transition-all {
 .profile-container {
   width: 100%;
   min-height: 100vh;
-  /* background-image: url(pixelated\ cloud.png); */
-  /* background-size: cover;
+  background-image: url(/public/pixelated\ cloud.png);
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll; */
+  background-attachment: scroll;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
