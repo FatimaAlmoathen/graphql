@@ -32,11 +32,6 @@ interface XPProject {
   formattedAmount: string;
 }
 
-interface XPData {
-  totalXP: string;
-  projects: XPProject[];
-}
-
  interface Label {
     labelName: string;
   } 
@@ -518,7 +513,7 @@ export default function ProfilePage() {
     setLoading(false);
   }
 }
-  }, []);
+  }, [router]);
 
 //   if (!user) {
 //     console.log('No user found - redirecting');
