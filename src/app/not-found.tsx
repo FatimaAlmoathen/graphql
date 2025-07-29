@@ -25,7 +25,7 @@ export default function NotFound() {
           <h1 className={styles.notFoundTitle}>404</h1>
           <h2 className={styles.notFoundSubtitle}>Page Not Found</h2>
           <p className={styles.notFoundMessage}>
-            The page you're looking for doesn't exist or has been moved.
+            The page you are looking for does not exist or has been moved.
           </p>
           
           <Link

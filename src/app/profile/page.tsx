@@ -8,7 +8,6 @@ import { logout } from '@/lib/auth';
 import { apolloClient } from '@/lib/apollo-client';
 import {  
   GET_USER_BASIC_INFO, 
-  GET_USER_EVENTS, 
   GET_USER_TRANSACTIONS, 
   GET_USER_XP_SUM,
   GET_USER_XP_DETAILS,
@@ -81,10 +80,6 @@ interface XPDetail {
   amount: number;
 }
 
-interface Skill {
-  name: string;
-  amount: number;
-}
 interface ProfileData {
   userData: UserData;
   transactions: Transaction[];
@@ -116,26 +111,26 @@ interface ProfileData {
     return pattern.test(path);
   };
 
- const processXPData = (xpData: XPDetail[]): XPData => {
-  const projects: XPProject[] = [];
-  let totalXP = 0;
+//  const processXPData = (xpData: XPDetail[]): XPData => {
+//   const projects: XPProject[] = [];
+//   let totalXP = 0;
 
-  xpData.forEach((xp: XPDetail) => {
-    const amount = xp.amount || 0;
-    totalXP += amount;
-    projects.push({
-      name: getProjectName(xp.path),
-      path: xp.path,
-      amount: amount,
-      formattedAmount: formatXP(amount)
-    });
-  });
+//   xpData.forEach((xp: XPDetail) => {
+//     const amount = xp.amount || 0;
+//     totalXP += amount;
+//     projects.push({
+//       name: getProjectName(xp.path),
+//       path: xp.path,
+//       amount: amount,
+//       formattedAmount: formatXP(amount)
+//     });
+//   });
 
-  return {
-    totalXP: formatXP(totalXP),
-    projects: projects
-  };
-};
+//   return {
+//     totalXP: formatXP(totalXP),
+//     projects: projects
+//   };
+// };
 
   const PieChart = ( {passed, failed}: {passed: number, failed: number}) =>{
     const total = passed  +failed
@@ -228,7 +223,6 @@ const SkillsBarChart = ({ skills }: { skills: { name: string; amount: number }[]
   const axisOffset = 30;
 
     const barColor = '#aa80ffff';
-  const activeBarColor = '#ffabebff'; 
   const axisColor = '#3741519f';
   const labelColor = '#ff71deff';
   const whiteColor = '#ffffff';
@@ -361,7 +355,7 @@ const SkillsBarChart = ({ skills }: { skills: { name: string; amount: number }[]
   );
 };
 
-const processSkillsData = (transactions: any[]) => {
+const processSkillsData = (transactions: Transaction[]) => {
      const skillMap = new Map<string, number>();
   
   transactions.forEach(transaction => {
@@ -382,7 +376,7 @@ const processSkillsData = (transactions: any[]) => {
     .sort((a, b) => b.amount - a.amount);
 };
 
-const countUniquePassedAudits = (audits: Audit[], startDate: string): number => {
+const countUniquePassedAudits = (audits: Audit[]): number => {
   const uniquePassed = new Set <string>();
 
   audits.forEach(audit => {
@@ -395,7 +389,7 @@ const countUniquePassedAudits = (audits: Audit[], startDate: string): number => 
 }
 
 
-const countUniqueFailedAudits = (audits: Audit[], startDate: string): number => {
+const countUniqueFailedAudits = (audits: Audit[]): number => {
   const uniqueFailed = new Set <string>();
 
   audits.forEach( audit => {
@@ -543,7 +537,7 @@ export default function ProfilePage() {
     return <div>No profile data available</div>;
   }
 
-  const { userData, transactions, xpSum, audits, progress, skills } = profileData;
+  const { userData, audits, skills } = profileData;
 
 const xpDetails = profileData.xpDetails || [];
 const totalXP = profileData.xpSum || 0;
@@ -642,8 +636,8 @@ const processedSkills = skills?.length > 0 ? processSkillsData(skills) : [];
               <div className="profile-card">
                 <h2 className="card-title-ps">Projects Status</h2>
                 <PieChart 
-                  passed={countUniquePassedAudits(audits, userData.updatedAt)}
-                  failed={countUniqueFailedAudits(audits, userData.updatedAt)}
+                  passed={countUniquePassedAudits(audits)}
+                  failed={countUniqueFailedAudits(audits)}
                 />
               </div>
             )}
