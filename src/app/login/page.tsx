@@ -26,12 +26,13 @@ export default function LoginPage() {
   };
 
  return (
+  <div className="login-page-container">
     <div className="login-wrapper">
       <Image 
         src={graphyGraphic} 
         alt="graphy" 
         width={700}
-        height={500}
+        height={700}
         className="graphic-image"
       />
       <div className="login-content">
@@ -82,6 +83,7 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
