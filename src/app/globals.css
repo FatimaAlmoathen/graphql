@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hanalei+Fill&family=Nabla&family=Tilt+Neon&family=Tiny5&family=WDXL+Lubrifont+TC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&family=WDXL+Lubrifont+TC&display=swap');
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -27,7 +27,23 @@
 html, body {
   width: 100%;
 }
-
+  html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available;
+  }
+  
+  .fixed {
+    position: fixed;
+    height: -webkit-fill-available;
+  }
+}
 /* Layout styles */
 .container {
   width: 100%;
@@ -328,11 +344,11 @@ rect.transition-all {
 .profile-container {
   width: 100%;
   min-height: 100vh;
-  background-image: url(/public/pixelated\ cloud.png);
+  background-image: url(/public/pixelated-cloud.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment:scroll;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
@@ -497,6 +513,13 @@ rect.transition-all {
   background: #a1a1a1;
 }
 @media (max-width: 1024px) {
+   html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
   .profile-layout {
     grid-template-areas:
       "profile-center"
@@ -570,6 +593,13 @@ rect.transition-all {
 }
 @media (max-width: 950px){
 
+   html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
   .profile-layout {
     grid-template-areas:
       "profile-center"
@@ -632,6 +662,13 @@ rect.transition-all {
 }
 
 @media (max-width: 780px) {
+   html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
   .profile-top-row, .profile-bottom-row{
     width: 70%;
   }
@@ -642,6 +679,13 @@ rect.transition-all {
 }
 
 @media (max-width: 700px) {
+   html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
   .profile-top-row, .profile-bottom-row{
     width: 60%;
   }
@@ -689,6 +733,13 @@ rect.transition-all {
   }
 }
 @media (max-width: 600px) {
+  html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    position: relative;
+  }
   .level-container,
   .audit-ratio-container {
     width: 140px !important;

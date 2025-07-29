@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Image from 'next/image'
-import pixelatedCloud from './pixelated cloud.png'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,22 +18,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} relative min-h-screen`}>
+      <body className={`${inter.className} relative h-full overflow-x-hidden`}>
         {/* Background Image*/}
-        <div className="absolute inset-0 -z-50 h-full w-full">
+        <div className="fixed inset-0 -z-50 min-h-screen">
         <Image
-          src={pixelatedCloud}
+          src="/pixelated-cloud.png"
           alt="Pixelated cloud background"
           fill
           className="object-cover"
           priority
           quality={100}
-          placeholder="blur"
+          sizes="100vw"
         />
       </div>
         
         {/* Main content*/}
-        <div className="relative z-10 min-h-screen w-full overflow-x-hidden">
+        <div className="relative z-10 min-h-screen">
           {children}
         </div>
       </body>

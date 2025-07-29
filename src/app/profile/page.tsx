@@ -129,7 +129,6 @@ interface ProfileData {
 
   const PieChart = ( {passed, failed}: {passed: number, failed: number}) =>{
     const total = passed  +failed
-    console.log("passed:", passed, "----failed: ", failed)
     const passedPercentage = (passed/total) * 100;
     const failedPercentage = (failed/total) * 100;
 

@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import pixelatedCloud from './pixelated cloud.png';
 import styles from './error.module.css';
 
 export default function Error({
@@ -22,13 +21,12 @@ export default function Error({
       {/* Background Image */}
       <div className={styles.backgroundImage}>
         <Image
-          src={pixelatedCloud}
+          src="/pixelated-cloud.png"
           alt="Pixelated cloud background"
-          fill
           style={{ objectFit: 'cover' }}
+          fill
           priority
           quality={100}
-          placeholder="blur"
         />
       </div>
       
