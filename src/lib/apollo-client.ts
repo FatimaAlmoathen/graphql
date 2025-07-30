@@ -1,3 +1,4 @@
+// apollo client is the core class for managing GraphQL operations (queries/mutations).
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { isAuthenticated, logout } from './auth';

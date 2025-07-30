@@ -10,7 +10,6 @@ interface JwtPayload {
 }
 
 export const isTokenExpired = (decodedToken: JwtPayload): boolean => {
-  console.log("exp date: ",decodedToken.exp)
   if (!decodedToken.exp) return true; // if no exp, invalid
   return Date.now() >= decodedToken.exp * 1000;
 };
@@ -18,6 +17,7 @@ export const isTokenExpired = (decodedToken: JwtPayload): boolean => {
 export const login = async (usernameOrEmail: string, password: string) => {
   const credentials = btoa(`${usernameOrEmail}:${password}`);
 
+  //send req to endpoint with basic auth, response is jwt
   const response = await fetch(process.env.NEXT_PUBLIC_AUTH_ENDPOINT!, {
     method: 'POST',
     headers: {
@@ -43,6 +43,7 @@ export const login = async (usernameOrEmail: string, password: string) => {
     throw new Error("Token is expired");
   }
 
+  //store jwt in local storage
   localStorage.setItem('jwt', token);
   return token;
 };
@@ -80,6 +81,7 @@ export const getCurrentUser = (): JwtPayload | null => {
       return null;
     }
 
+    //return user info from token payload
      return {
       sub: decoded.sub,
       id: decoded.id || (decoded.sub ? parseInt(decoded.sub) : undefined),
