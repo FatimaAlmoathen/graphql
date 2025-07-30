@@ -16,3 +16,4 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
 
   return isAuthenticated() ? <>{children}</> : null; //only if authenticated render components
 }
+//
