@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import AuthWrapper from '@/components/AuthWrapper';
-import { getCurrentUser } from '@/lib/auth';
+import { getCurrentUser, isAuthenticated } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import { logout } from '@/lib/auth';
 import { apolloClient } from '@/lib/apollo-client';
@@ -419,7 +419,9 @@ export default function ProfilePage() {
     router.push('/login');
     return;
     }
-
+    if (!isAuthenticated()) {
+    router.push('/login');
+  }
     setUser(currentUser); //updates user state
     
     if (currentUser?.id) {

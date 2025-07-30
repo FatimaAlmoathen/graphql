@@ -10,6 +10,7 @@ interface JwtPayload {
 }
 
 export const isTokenExpired = (decodedToken: JwtPayload): boolean => {
+  console.log("exp date: ",decodedToken.exp)
   if (!decodedToken.exp) return true; // if no exp, invalid
   return Date.now() >= decodedToken.exp * 1000;
 };

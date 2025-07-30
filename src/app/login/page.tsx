@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/lib/auth';
+import { login, isAuthenticated, logout } from '@/lib/auth';
 import Image from 'next/image';
 import graphyGraphic from './graphy-graphic.png';
 
@@ -11,6 +11,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      logout();
+      // router.push('/profile'); // prevent going back (routing to profile) or logout so that jwt is deleted? or i can add loading with condition
+    }
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
